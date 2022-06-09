@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Layout of App](https://github.com/EmanuelGF/template-react-ui/blob/main/src/App.js).
+https://github.com/enaqx/awesome-react
 
 ## Available Scripts
 
