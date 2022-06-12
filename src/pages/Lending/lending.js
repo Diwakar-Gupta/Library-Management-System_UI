@@ -13,7 +13,7 @@ export default class Lending extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/books/`)
+    axios.get(`/api/lendings/`)
       .then(res => {
         const items = res.data['results'];
         this.setState({ items });
@@ -25,12 +25,12 @@ export default class Lending extends React.Component {
 
     return (
         <DefaultLayout>
-          <div className="books_page">
+          <div className="lendings_page">
             <ul>
               {loaded?(
                   this.state.items
-                    .map(book =>
-                      <li key={book.isbn}> {book.title} </li>
+                    .map(item =>
+                      <li key={item.pk}> {item.account.name} issued {item.book_item.title} </li>
                     )
               ):(
                   <p>Loading</p>

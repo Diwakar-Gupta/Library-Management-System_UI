@@ -1,20 +1,23 @@
- /**
- * Default Layout
- * This will be the main Layout. (Implemented on the Home page).
- */
-
 import React from "react";
 import "./defaultLayout.css";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 //Components
+import Header from "components/Header/header";
 import SideBar from "components/Sidebar/sidebar";
 
 export default function DefaultLayout({ children }) {
 	return (
-		<div className="main_layout">
- 			<SideBar />
-			{children}
-{/* // 			<Footer /> */}
-		</div>
+		<Row style={{'height': '100%'}}>
+			<Col xs={4}>
+				<SideBar />
+			</Col>
+			<Col>
+				<Header/>
+				<div style={{'height':'1rem'}}></div>
+				{children}
+			</Col>
+		</Row>
 	);
 }
