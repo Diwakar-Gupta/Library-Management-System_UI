@@ -1,6 +1,7 @@
 import React from "react";
 
 import DefaultLayout from "layouts/DefaultLayout/defaultLayout";
+import Loading from "components/loading";
 const axios =  require('axios');
 
 
@@ -22,9 +23,19 @@ export default class Lending extends React.Component {
 
   render() {
     const loaded = this.state.items != null;
+    const linkhistory = [
+      {
+        url: '/',
+        name: 'pages',
+      },
+      {
+        url: '/book/',
+        name: 'book',
+      },
+    ]
 
     return (
-        <DefaultLayout>
+        <DefaultLayout linkhistory={linkhistory}>
           <div className="books_page">
             <ul>
               {loaded?(
@@ -33,7 +44,7 @@ export default class Lending extends React.Component {
                       <li key={book.isbn}> {book.title} </li>
                     )
               ):(
-                  <p>Loading</p>
+                  <Loading/>
               )
               }
             </ul>

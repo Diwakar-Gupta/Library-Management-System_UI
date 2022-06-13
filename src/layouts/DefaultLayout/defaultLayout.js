@@ -7,14 +7,14 @@ import Col from 'react-bootstrap/Col';
 import Header from "components/Header/header";
 import SideBar from "components/Sidebar/sidebar";
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children, linkhistory }) {
 	return (
-		<Row style={{'height': '100%'}}>
-			<Col xs={4}>
+		<Row style={{'width': '100%'}}>
+			<Col xs={2}>
 				<SideBar />
 			</Col>
 			<Col>
-				<Header/>
+				<Header linkhistory={linkhistory} />
 				<div style={{'height':'1rem'}}></div>
 				{children}
 			</Col>

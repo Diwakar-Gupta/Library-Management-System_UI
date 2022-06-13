@@ -3,7 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom"
+import Image from 'react-bootstrap/Image'
 
 
 import './sidebar.css';
@@ -25,16 +27,21 @@ export default function SideBar(props) {
                     </Navbar.Brand>
                 </Container>
             </Navbar>
-            <Nav defaultActiveKey="/home" as="ul" className="flex-column">
+            <Nav defaultActiveKey="/home" as="ul" className="flex-column m-3">
                 <Nav.Item as="li">
-                    <Nav.Link as={Link} to="/books">Book</Nav.Link>
-                    
+                        
+                <Nav.Link as={Link} to="/books">
+                    Book
+                </Nav.Link>
                 </Nav.Item>
                 <Nav.Item as="li">
                     <Nav.Link as={Link} to="/lendings">Lending</Nav.Link>
                 </Nav.Item>
                 <Nav.Item as="li">
                     <Nav.Link as={Link} to="/reservations">Reservation</Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                    <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                 </Nav.Item>
             </Nav>
         </Col>
