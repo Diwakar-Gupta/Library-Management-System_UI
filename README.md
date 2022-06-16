@@ -4,7 +4,7 @@
 https://github.com/enaqx/awesome-react
 https://demos.creative-tim.com/muse-ant-design-dashboard/?_ga=2.76291222.2059342387.1655115943-343869289.1655115943#/dashboard
 
-[Tutorial](https://react-bootstrap.github.io/components/spinners/#spinner-props)
+[Bootstrap Tutorial](https://react-bootstrap.github.io/components/spinners/#spinner-props)
 
 ## Available Scripts
 

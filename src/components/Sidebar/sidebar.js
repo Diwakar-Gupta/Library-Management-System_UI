@@ -3,9 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom"
-import Image from 'react-bootstrap/Image'
 
 
 import './sidebar.css';
