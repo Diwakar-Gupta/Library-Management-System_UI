@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import Card from 'react-bootstrap/Card';
 import Loading from "components/loading";
@@ -11,7 +16,7 @@ import Paginate from './paginater';
 const axios =  require('axios');
 
 
-export default class BookList extends React.Component {
+class BookList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +56,7 @@ export default class BookList extends React.Component {
   }
 
   bookClickHandle(isbn) {
-    console.log(`book clicked with isbn ${isbn}`);
+    this.props.router.navigate(`/book/${isbn}/`);
   }
 
   render() {
@@ -76,3 +81,11 @@ export default class BookList extends React.Component {
     );
   }
 }
+
+function BookListWrapper() {
+  let location = useLocation();
+  let navigate = useNavigate();
+  let params = useParams();
+  return <BookList router={{location, navigate, params}} />
+}
+export default BookListWrapper;

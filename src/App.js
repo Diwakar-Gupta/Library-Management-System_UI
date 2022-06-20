@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 //Pages
 import Home from "pages/Home/home";
 import BookList from "pages/Book/list";
+import BookDetailWrapper from "pages/Book/detail";
 import LendingList from "pages/Lending/list";
 import NotFound from "pages/notfound";
 import Login from "pages/Auth/login";
@@ -16,6 +17,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/books/" element={<BookList />}></Route>
+                <Route path="/book/:isbn/" element={<BookDetailWrapper />}></Route>
                 <Route path="/lendings/" element={<LendingList />}></Route>
                 <Route path="/login/" element={<Login />}></Route>
                 <Route path="/profile/" element={<Profile />}></Route>
