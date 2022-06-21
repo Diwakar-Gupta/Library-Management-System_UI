@@ -6,6 +6,8 @@ https://demos.creative-tim.com/muse-ant-design-dashboard/?_ga=2.76291222.2059342
 
 [Bootstrap Tutorial](https://react-bootstrap.github.io/components/spinners/#spinner-props)
 
+[Fontawesome](https://fontawesome.com/v5/docs/web/use-with/react)
+
 ## Available Scripts
 
 In the project directory, you can run:

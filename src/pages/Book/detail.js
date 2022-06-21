@@ -5,19 +5,37 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+import DefaultLayout from "layouts/DefaultLayout/defaultLayout";
+
 
 class BookDetail extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
       };
+      this.linkhistory = [
+        {
+          url: '/',
+          name: 'home',
+        },
+        {
+          url: '/books/',
+          name: 'books',
+        },
+        {
+          url: `/book/${this.props.router.params.isbn}/`,
+          name: 'book',
+        },
+      ];
     }
 
     render() {
       const isbn = this.props.router.params.isbn;
 
       return (
-          <p>Isbn ={isbn}</p>
+          <DefaultLayout linkhistory={this.linkhistory}>
+            <p>Isbn ={isbn}</p>
+          </DefaultLayout>
       );
     }
 }

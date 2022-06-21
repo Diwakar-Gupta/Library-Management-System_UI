@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 
 import DefaultLayout from "layouts/DefaultLayout/defaultLayout";
@@ -10,7 +15,7 @@ import Loading from "components/loading";
 const axios =  require('axios');
 // axios.defaults.headers.common['Authorization'] = "Token 3039b53d7e6932822ab3320c731ff1d8d61d63c0";
 
-export default class Lending extends React.Component {
+class Lending extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +54,10 @@ export default class Lending extends React.Component {
       })
   }
 
+  lendingClickHandle(pk) {
+    this.props.router.navigate(`/lending/${pk}/`);
+  }
+
   render() {
     const loaded = this.state.lendings != null;
 
@@ -60,7 +69,7 @@ export default class Lending extends React.Component {
             </Card.Header>
             <Card.Body>
               {loaded?(
-                <DataTable lendings={this.state.lendings}/>
+                <DataTable lendings={this.state.lendings} lendingClickHandle={ (pk) => { this.lendingClickHandle(pk); } } />
               ):(
                 <Loading/>
               )}
@@ -71,3 +80,11 @@ export default class Lending extends React.Component {
     );
   }
 }
+
+function LendingListWrapper() {
+  let location = useLocation();
+  let navigate = useNavigate();
+  let params = useParams();
+  return <Lending router={{location, navigate, params}} />
+}
+export default LendingListWrapper;

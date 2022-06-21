@@ -1,11 +1,21 @@
 
 import React from "react";
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { Link } from "react-router-dom"
+
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import { Link } from "react-router-dom"
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import Overlay from 'react-bootstrap/Overlay'
 import Container from 'react-bootstrap/Container';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Popover from 'react-bootstrap/Popover'
+import Button from 'react-bootstrap/Button'
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngry } from '@fortawesome/free-solid-svg-icons'
 
 import './header.css';
 
@@ -34,6 +44,23 @@ export default function Header({ linkhistory }) {
                 aria-label="Search"
                 />
             </Form>
+            <OverlayTrigger
+                trigger="click"
+                placement={"bottom"}
+                overlay={
+                    <Popover id={`popover-positioned-bottom`}>
+                    <Popover.Header as="h3">{`Notifications`}</Popover.Header>
+                    <Popover.Body>
+                        <strong>No notifications for now</strong> Check this info.
+                    </Popover.Body>
+                    </Popover>
+                }
+                >
+                    <Nav.Link>
+                        <FontAwesomeIcon color={"black"} icon={faAngry} />
+                    </Nav.Link>
+            </OverlayTrigger>
+
             </Navbar.Collapse>
         </Navbar>
     );
