@@ -10,7 +10,7 @@ import SideBar from "components/Sidebar/sidebar";
 export default function DefaultLayout({ children, linkhistory }) {
 	return (
 		<Row style={{'width': '100%'}}>
-			<Col xs={2}>
+			<Col xs={12} sm={2} >
 				<SideBar />
 			</Col>
 			<Col>

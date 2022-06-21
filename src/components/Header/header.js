@@ -7,22 +7,32 @@ import FormControl from 'react-bootstrap/FormControl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import Overlay from 'react-bootstrap/Overlay'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
-import Button from 'react-bootstrap/Button'
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngry } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import './header.css';
+
+const axios =  require('axios');
+
+function logout(){
+    axios.get('/auth/logout/')
+    .then( (e)=>{} )
+    .catch((e)=>{})
+    .finally( ()=>{
+        window.location.reload();
+    } )
+}
 
 export default function Header({ linkhistory }) {
     if(!linkhistory)linkhistory=[];
     return (
-        <Navbar>
+        <Navbar expand="md">
             <Navbar variant="light">
                 <Container>
                  <Breadcrumb >
@@ -36,31 +46,38 @@ export default function Header({ linkhistory }) {
                 </Container>
             </Navbar>
             <Navbar.Collapse className="justify-content-end">
-            <Form className="d-flex">
-                <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                />
-            </Form>
-            <OverlayTrigger
-                trigger="click"
-                placement={"bottom"}
-                overlay={
-                    <Popover id={`popover-positioned-bottom`}>
-                    <Popover.Header as="h3">{`Notifications`}</Popover.Header>
-                    <Popover.Body>
-                        <strong>No notifications for now</strong> Check this info.
-                    </Popover.Body>
-                    </Popover>
-                }
-                >
-                    <Nav.Link>
-                        <FontAwesomeIcon color={"black"} icon={faAngry} />
-                    </Nav.Link>
-            </OverlayTrigger>
-
+                <Form className="d-flex">
+                    <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    />
+                </Form>
+                <OverlayTrigger
+                    trigger="click"
+                    placement={"bottom"}
+                    overlay={
+                        <Popover id={`popover-positioned-bottom`}>
+                        <Popover.Header as="h3">{`Notifications`}</Popover.Header>
+                        <Popover.Body>
+                            <strong>No notifications for now</strong> Check this info.
+                        </Popover.Body>
+                        </Popover>
+                    }
+                    >
+                        <Nav.Link>
+                            <FontAwesomeIcon color={"black"} icon={faBell} />
+                        </Nav.Link>
+                </OverlayTrigger>
+                <NavDropdown title={<FontAwesomeIcon color={"black"} icon={faUser} />} id="navbarScrollingDropdown">
+                    <NavDropdown.Item href="/auth/login/">Login</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action5">
+                        Something else here
+                    </NavDropdown.Item>
+                </NavDropdown>
             </Navbar.Collapse>
         </Navbar>
     );

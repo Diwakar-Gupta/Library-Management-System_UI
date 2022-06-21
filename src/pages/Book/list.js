@@ -22,6 +22,7 @@ class BookList extends React.Component {
     this.state = {
       books: null,
       page: null,
+      error:null,
     };
     this.linkhistory = [
       {
@@ -50,8 +51,13 @@ class BookList extends React.Component {
         
         this.setState({ 
           books,
-          page
+          page,
+          error:null,
         });
+      })
+      .catch(err => {
+        const error = `${err.response.status} ${err.response.statusText}`;
+        this.setState({error});
       })
   }
 
@@ -61,6 +67,7 @@ class BookList extends React.Component {
 
   render() {
     const loaded = this.state.books != null;
+    const { error } = this.state;
 
     return (
         <DefaultLayout linkhistory={this.linkhistory}>
@@ -71,9 +78,9 @@ class BookList extends React.Component {
             <Card.Body>
               {loaded?(
                 <DataTable books={this.state.books} bookClickHandle={ (isbn) => { this.bookClickHandle(isbn) } }/>
-              ):(
-                <Loading/>
-              )}
+              ):
+                error?(<p>{error}</p>):(<Loading/>)
+              }
             </Card.Body>
             <Card.Footer><Paginate page={ this.state.page } setPage={ (url) => {this.fetchData(url)} }/></Card.Footer>
           </Card>

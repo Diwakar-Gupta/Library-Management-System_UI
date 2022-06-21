@@ -11,6 +11,12 @@ import NotFound from "pages/notfound";
 import Login from "pages/Auth/login";
 import Profile from "pages/Profile/profile";
 
+/*
+Path should not start with
+1.  api/
+2.  admin/
+3.  auth/
+*/
 
 export default function App() {
 	return (
