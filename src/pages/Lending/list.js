@@ -13,7 +13,7 @@ import Paginate from './paginater';
 import Loading from "components/loading";
 
 const axios =  require('axios');
-// axios.defaults.headers.common['Authorization'] = "Token 3039b53d7e6932822ab3320c731ff1d8d61d63c0";
+
 
 class Lending extends React.Component {
   constructor(props) {
@@ -21,6 +21,7 @@ class Lending extends React.Component {
     this.state = {
       lendings: null,
       page: null,
+      error:null,
     };
     this.linkhistory = [
       {
@@ -52,6 +53,10 @@ class Lending extends React.Component {
           page
         });
       })
+      .catch(err => {
+        const error = `${err.response.status} ${err.response.statusText}`;
+        this.setState({error});
+      })
   }
 
   lendingClickHandle(pk) {
@@ -60,6 +65,7 @@ class Lending extends React.Component {
 
   render() {
     const loaded = this.state.lendings != null;
+    const { error } = this.state;
 
     return (
         <DefaultLayout linkhistory={this.linkhistory}>
@@ -71,7 +77,7 @@ class Lending extends React.Component {
               {loaded?(
                 <DataTable lendings={this.state.lendings} lendingClickHandle={ (pk) => { this.lendingClickHandle(pk); } } />
               ):(
-                <Loading/>
+                error?(<p>{error}</p>):(<Loading/>)
               )}
             </Card.Body>
             <Card.Footer><Paginate page={ this.state.page } setPage={ (url) => {this.fetchData(url)} }/></Card.Footer>

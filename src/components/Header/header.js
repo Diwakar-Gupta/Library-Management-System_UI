@@ -1,21 +1,21 @@
-
 import React from "react";
 import { Link } from "react-router-dom"
 
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import Nav from 'react-bootstrap/Nav'
+import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 
+import Notification from './notification';
 import './header.css';
 
 const axios =  require('axios');
@@ -30,6 +30,7 @@ function logout(){
 }
 
 export default function Header({ linkhistory }) {
+
     if(!linkhistory)linkhistory=[];
     return (
         <Navbar expand="md">
@@ -54,22 +55,7 @@ export default function Header({ linkhistory }) {
                     aria-label="Search"
                     />
                 </Form>
-                <OverlayTrigger
-                    trigger="click"
-                    placement={"bottom"}
-                    overlay={
-                        <Popover id={`popover-positioned-bottom`}>
-                        <Popover.Header as="h3">{`Notifications`}</Popover.Header>
-                        <Popover.Body>
-                            <strong>No notifications for now</strong> Check this info.
-                        </Popover.Body>
-                        </Popover>
-                    }
-                    >
-                        <Nav.Link>
-                            <FontAwesomeIcon color={"black"} icon={faBell} />
-                        </Nav.Link>
-                </OverlayTrigger>
+                <Notification/>
                 <NavDropdown title={<FontAwesomeIcon color={"black"} icon={faUser} />} id="navbarScrollingDropdown">
                     <NavDropdown.Item href="/auth/login/">Login</NavDropdown.Item>
                     <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
