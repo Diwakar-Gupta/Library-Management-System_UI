@@ -4,14 +4,16 @@ import Nav from 'react-bootstrap/Nav';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import ListGroup from 'react-bootstrap/ListGroup'
+import Toast from 'react-bootstrap/Toast'
+import ToastContainer from 'react-bootstrap/ToastContainer'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const axios =  require('axios');
 
 
-export default function Notification({}) {
+export default function Notification(props) {
 
     const [notifications, setNotifications] = useState([]);
 
@@ -35,20 +37,24 @@ export default function Notification({}) {
                 <Popover id={`popover-positioned-bottom`}>
                 <Popover.Header as="h3">{`Notifications`}</Popover.Header>
                 {/* <Popover.Body> */}
-                    <ListGroup>
+                    <ToastContainer className='p2'>
                         {notifications.length>0?(
                             notifications
                             .map( noti => 
-                                <ListGroup.Item key={ noti.pk} variant={noti.is_read?'':'info'}>
-                                    { noti.content }
-                                </ListGroup.Item>
+                                <Toast key={ noti.pk}>
+                                    <Toast.Header closeButton={!noti.is_read}>
+                                    <strong className="me-auto">{'Issue'}</strong>
+                                    <small className="text-muted">{ new Date(noti.created_on).toDateString() }</small>
+                                    </Toast.Header>
+                                    <Toast.Body>{ noti.content }</Toast.Body>
+                                </Toast>
                             )
                         ):(
                             <ListGroup.Item>
                                 <strong>No notifications for now</strong>
                             </ListGroup.Item>
                         )}
-                    </ListGroup>
+                    </ToastContainer>
                 {/* </Popover.Body> */}
                 </Popover>
             }

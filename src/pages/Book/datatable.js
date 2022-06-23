@@ -3,7 +3,7 @@ import Badge from 'react-bootstrap/Badge';
 
 function DataTable({ books, bookClickHandle }){
     return (
-        <Table hover >
+        <Table hover responsive="md" >
             <thead>
                 <tr>
                     <th>isbn</th>

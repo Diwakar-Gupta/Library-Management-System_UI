@@ -23,6 +23,9 @@ class BookList extends React.Component {
       books: null,
       page: null,
       error:null,
+      filters:{
+        page_size: 5
+      }
     };
     this.linkhistory = [
       {
@@ -37,10 +40,11 @@ class BookList extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchData();
+    const url=`/api/books/?page_size=${this.state.filters.page_size}`
+    this.fetchData(url);
   }
   
-  fetchData(url=`/api/books/`) {
+  fetchData(url) {
     axios.get(url)
       .then(res => {
         const books = res.data['results'];
@@ -61,19 +65,31 @@ class BookList extends React.Component {
       })
   }
 
+  setFilters(filters){
+    let newFilter = {...this.state.filters};
+
+    for(let key in filters){
+      newFilter[key] = filters[key];
+    }
+    
+    this.setState({books:null,error:null,page:null, filters:newFilter});
+    const url=`/api/books/?page_size=${newFilter.page_size}`;
+    this.fetchData(url);
+  }
+
   bookClickHandle(isbn) {
     this.props.router.navigate(`/book/${isbn}/`);
   }
 
   render() {
     const loaded = this.state.books != null;
-    const { error } = this.state;
+    const { error, filters } = this.state;
 
     return (
         <DefaultLayout linkhistory={this.linkhistory}>
           <Card className="text-center">
             <Card.Header>
-              <Filters title="Books"/>
+              <Filters filters={filters} setFilters={ (fil) => this.setFilters(fil) } title="Books"/>
             </Card.Header>
             <Card.Body>
               {loaded?(
@@ -82,7 +98,7 @@ class BookList extends React.Component {
                 error?(<p>{error}</p>):(<Loading/>)
               }
             </Card.Body>
-            <Card.Footer><Paginate page={ this.state.page } setPage={ (url) => {this.fetchData(url)} }/></Card.Footer>
+            <Card.Footer><Paginate pageSize={this.state.filters.page_size} page={ this.state.page } setPage={ (url) => {this.fetchData(url)} }/></Card.Footer>
           </Card>
       </DefaultLayout>
     );
