@@ -13,7 +13,8 @@ class LendingDetail extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        lending:null
+        lending:null,
+        error:null
       };
       this.linkhistory = [
         {
@@ -84,7 +85,6 @@ class LendingDetail extends React.Component {
       return (
             <DefaultLayout linkhistory={this.linkhistory}>
                 {lending?( this.detail(lending) ): (<p>{error}</p>)}
-              
             </DefaultLayout>
       );
     }
